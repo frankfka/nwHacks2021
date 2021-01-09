@@ -1,11 +1,11 @@
 import 'emoji-log';
-import {browser} from 'webextension-polyfill-ts';
+import { browser } from 'webextension-polyfill-ts';
 import {
   ParseDocumentSuccessMessage,
   RuntimeMessage,
   RuntimeMessageType,
 } from '../Common/runtimeMessage';
-import {ParsedDocument} from '../Common/parsedDocument';
+import { ParsedDocument } from '../Common/parsedDocument';
 
 let parsedReaderDocument: ParsedDocument | undefined;
 

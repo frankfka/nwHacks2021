@@ -2,14 +2,13 @@ import DOMPurify from 'dompurify';
 import * as React from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import { ParsedDocument } from '../../Common/parsedDocument';
+import ReaderHeader from '../components/ReaderHeader';
 
 interface ReaderAppProps {
   parsedDocument: ParsedDocument;
 }
 
 function transform(node: any, index: number) {
-  console.log(node.type);
-  console.log(node.name);
   if (node.type === 'tag' && node.name === 'div') {
     return convertNodeToElement(node, index, transform);
   }
@@ -34,13 +33,11 @@ export default function ReaderApp({
     USE_PROFILES: { html: true },
   });
 
-  console.log(purifiedContent);
-
   const parsedDoc = ReactHtmlParser(purifiedContent, { transform });
 
-  console.log(parsedDoc);
   return (
     <div id="reader-app">
+      <ReaderHeader />
       <div className="container mx-auto my-32">
         {/* eslint-disable-next-line react/no-danger */}
         {parsedDoc}

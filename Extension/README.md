@@ -1,4 +1,4 @@
-# nwHacks 2021 - Extension
+# nwHacks 2021 - Backend
 
 ## Getting Started
 
