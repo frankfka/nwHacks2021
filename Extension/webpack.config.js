@@ -16,6 +16,7 @@ const sourcePath = path.join(__dirname, 'source');
 const destPath = path.join(__dirname, 'extension');
 const nodeEnv = process.env.NODE_ENV || 'development';
 const targetBrowser = process.env.TARGET_BROWSER;
+const isDevelopment = nodeEnv === 'development';
 
 const extensionReloaderPlugin =
   nodeEnv === 'development'
@@ -172,7 +173,7 @@ module.exports = {
   ],
 
   optimization: {
-    minimize: true,
+    minimize: !isDevelopment,
     minimizer: [
       new TerserPlugin({
         parallel: true,

@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {Readability} from '@mozilla/readability';
-import {ParsedDocument} from '../Common/parsedDocument';
+import { Readability } from '@mozilla/readability';
+import { ParsedDocument } from '../Common/parsedDocument';
 
 export default function parseDocumentArticle(
   doc: Document
