@@ -1,5 +1,5 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import ReaderApp from './ReaderApp';
+import ReaderAppPage from './ReaderAppPage';
 
-ReactDOM.render(<ReaderApp />, document.getElementById('reader-root'));
+ReactDOM.render(<ReaderAppPage />, document.getElementById('reader-root'));
