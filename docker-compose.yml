@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  # backend:
-  #   build: ./Backend/
-  #   volumes:
-  #     - ./Backend:/code/
-  #   ports:
-  #     - 8000:8000
-  #   command: python main.py
+  backend:
+    build: ./Backend/
+    volumes:
+      - ./Backend:/code/
+    ports:
+      - 8000:8000
+    command: python main.py
 
   frontend:
     build: ./Extension

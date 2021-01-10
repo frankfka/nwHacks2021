@@ -10,9 +10,6 @@ import {
   TwitterShareButton,
 } from 'react-share';
 
-/**
- * Not connected to actual URLs. Display only.
- */
 const ShareComponent: React.FC = () => {
   const url = 'https://nwhacks.com';
 
