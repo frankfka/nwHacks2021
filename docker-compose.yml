@@ -3,6 +3,8 @@ version: '3.8'
 services:
   backend:
     build: ./Backend/
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/code/gcloud_creds.json
     volumes:
       - ./Backend:/code/
     ports:
