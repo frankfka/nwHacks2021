@@ -13,6 +13,7 @@ import getImportantText from '../hooks/getImportantText';
 import ReadToMe from '../components/ReadToMe';
 import { FaHighlighter } from 'react-icons/fa';
 import classNames from 'classnames';
+import Meta from '../components/Meta';
 
 interface ReaderAppProps {
   parsedDocument: ParsedDocument;
@@ -97,6 +98,7 @@ export default function ReaderApp({
 
   return (
     <div id="reader-app">
+      <Meta />
       <ReaderHeader>
         <button
           type="button"
@@ -119,7 +121,7 @@ export default function ReaderApp({
         <ReadToMe textEl={containerEl} />
       </ReaderHeader>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div className="container mx-auto my-32 relative">
+      <div className="container mx-auto mb-32 mt-16 print:mt-0 relative">
         {/* <TestImportantText textEl={containerEl} /> */}
         <div
           ref={containerRef}

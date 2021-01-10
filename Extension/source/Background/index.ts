@@ -8,6 +8,7 @@ import {
 import { ParsedDocument } from '../Common/parsedDocument';
 
 let parsedReaderDocument: ParsedDocument | undefined;
+let docHead: string | undefined;
 
 browser.runtime.onInstalled.addListener((): void => {
   console.emoji('🦄', 'extension installed');
@@ -19,13 +20,17 @@ browser.runtime.onMessage.addListener(async (message: RuntimeMessage) => {
     const launchReaderMessage = message as ParseDocumentSuccessMessage;
     // Update global reader document
     parsedReaderDocument = launchReaderMessage.parsed;
+    docHead = launchReaderMessage.meta;
     // Launch new tab
     await browser.tabs.create({
       url: 'options.html',
     });
     console.log('Updated parsed reader document', parsedReaderDocument);
-  } else if (message.type === RuntimeMessageType.GET_PARSED_DOC) {
+  } else if (message.type === RuntimeMessageType.GET_PARSED_DOC)
     return parsedReaderDocument;
+  else if (message.type === RuntimeMessageType.GET_META) {
+    return docHead;
   }
+
   return undefined;
 });

@@ -1,11 +1,11 @@
-import {browser} from 'webextension-polyfill-ts';
+import { browser } from 'webextension-polyfill-ts';
 import {
   ParseDocumentSuccessMessage,
   RuntimeMessage,
   RuntimeMessageType,
 } from '../Common/runtimeMessage';
 import parseDocumentArticle from './parseDocumentArticle';
-import {mockCBCArticle} from '../data/mockCBCParsedArticle';
+import { mockCBCArticle } from '../data/mockCBCParsedArticle';
 
 async function processParseDocMessage(): Promise<void> {
   console.log('Starting to parse document');
@@ -14,6 +14,7 @@ async function processParseDocMessage(): Promise<void> {
     const updateReaderDocMessage: ParseDocumentSuccessMessage = {
       type: RuntimeMessageType.PARSE_DOC_SUCCESS,
       parsed: parsedArticle,
+      meta: window.document.head.innerHTML,
     };
     console.log('Sending success message', updateReaderDocMessage);
     await browser.runtime.sendMessage(updateReaderDocMessage);
@@ -33,6 +34,7 @@ export default async function processRuntimeMessage(
     const updateReaderDocMessage: ParseDocumentSuccessMessage = {
       type: RuntimeMessageType.PARSE_DOC_SUCCESS,
       parsed: mockCBCArticle,
+      meta: window.document.head.innerHTML,
     };
     console.log(
       'Sending success message with mock data',

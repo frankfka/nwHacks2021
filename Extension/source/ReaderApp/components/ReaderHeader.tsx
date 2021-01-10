@@ -3,7 +3,7 @@ import ConvertToPdfButton from './ConvertToPdfButton';
 import ShareComponent from './ShareComponent';
 
 const ReaderHeader: React.FC = ({ children }) => (
-  <div className="w-full py-4 border-b-2 border-black-500 bg-gray-50">
+  <div className="w-full py-4 border-b-2 border-black-500 bg-gray-50 print:hidden">
     <div className="container mx-auto flex flex-row justify-between items-center">
       <div>
         <img

@@ -1,4 +1,4 @@
-import {browser} from 'webextension-polyfill-ts';
+import { browser } from 'webextension-polyfill-ts';
 import processRuntimeMessage from './processRuntimeMessage';
 
 console.log('Content script initialized!');
