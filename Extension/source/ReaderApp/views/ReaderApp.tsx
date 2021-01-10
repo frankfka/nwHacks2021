@@ -20,7 +20,13 @@ export default function ReaderApp({
   parsedDocument,
 }: ReaderAppProps): JSX.Element {
   const [highlightedRange, setHighlightedRange] = React.useState<Selection>();
-  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const [containerEl, setContainerEl] = React.useState<HTMLDivElement>();
+  const containerRef = React.useCallback((node) => {
+    if (node !== null) {
+      setContainerEl(node);
+    }
+  }, []);
 
   const purifiedContent = DOMPurify.sanitize(parsedDocument.content, {
     USE_PROFILES: { html: true },
@@ -64,24 +70,25 @@ export default function ReaderApp({
   return (
     <div id="reader-app">
       <ReaderHeader>
-        <ReadToMe textRef={containerRef} />
+        <ReadToMe textEl={containerEl} />
       </ReaderHeader>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div
-        ref={containerRef}
-        className="container mx-auto my-32 relative"
-        onMouseUp={() => {
-          const range = window.getSelection();
-          if (range) {
-            setHighlightedRange(range);
-          } else setHighlightedRange(undefined);
-        }}
-        onMouseDown={() => setHighlightedRange(undefined)}
-      >
-        <TestImportantText textRef={containerRef} />
-        {/* eslint-disable-next-line react/no-danger */}
-        {parsedElements}
-        <HighlightedText range={highlightedRange} parentRef={containerRef} />
+      <div className="container mx-auto my-32 relative">
+        <TestImportantText textEl={containerEl} />
+        <div
+          ref={containerRef}
+          onMouseUp={() => {
+            const range = window.getSelection();
+            if (range) {
+              setHighlightedRange(range);
+            } else setHighlightedRange(undefined);
+          }}
+          onMouseDown={() => setHighlightedRange(undefined)}
+        >
+          {/* eslint-disable-next-line react/no-danger */}
+          {parsedElements}
+          <HighlightedText range={highlightedRange} parentEl={containerEl} />
+        </div>
       </div>
     </div>
   );

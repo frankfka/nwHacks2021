@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { MutableRefObject, useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const endpoint = 'http://localhost:8000/extract';
 
 interface Props {
-    textRef: MutableRefObject<HTMLDivElement | null>;
+  textEl: HTMLDivElement | undefined;
 }
 
 const getImportantText = (text: string) => {
@@ -22,11 +22,9 @@ const getImportantText = (text: string) => {
   return importantText;
 };
 
-
-export const TestImportantText: React.FC<Props> = ({ textRef }: Props) => {
-    console.log(textRef);
-  if (!textRef.current) return <div>"hi1"</div>;
-  const text = textRef.current.textContent;
+export const TestImportantText: React.FC<Props> = ({ textEl }: Props) => {
+  if (!textEl) return null;
+  const text = textEl.textContent;
   if (!text) return <div>"hi"</div>;
   const importantText = getImportantText(text);
 
