@@ -9,43 +9,10 @@ import * as React from 'react';
 import { ParsedDocument } from '../../Common/parsedDocument';
 import ReaderHeader from '../components/ReaderHeader';
 import HighlightedText from '../components/HighlightedText';
-
+import ReadToMe from '../components/ReadToMe';
 interface ReaderAppProps {
   parsedDocument: ParsedDocument;
 }
-
-const options: HTMLReactParserOptions = {
-  replace: (domNode) => {
-    if (domNode instanceof Element && domNode.attribs) {
-      const tagName = domNode.name;
-      const { children, attribs } = domNode;
-      // Workaround for Typescript
-      const domChildren = children as DOMNode[];
-
-      if (tagName === 'img') {
-        const { src, alt } = attribs;
-        return (
-          <div className="mx-auto" style={{ width: '400px' }}>
-            <img src={src} alt={alt} className="w-full object-contain" />
-          </div>
-        );
-      }
-      if (tagName === 'a') {
-        const { href } = attribs;
-        return (
-          <a className="underline" href={href}>
-            {domToReact(domChildren, options)}
-          </a>
-        );
-      }
-      if (tagName === 'p')
-        return (
-          <p className="text-lg my-4">{domToReact(domChildren, options)}</p>
-        );
-    }
-    return;
-  },
-};
 
 export default function ReaderApp({
   parsedDocument,
@@ -57,11 +24,46 @@ export default function ReaderApp({
     USE_PROFILES: { html: true },
   });
 
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      if (domNode instanceof Element && domNode.attribs) {
+        const tagName = domNode.name;
+        const { children, attribs } = domNode;
+        // Workaround for Typescript
+        const domChildren = children as DOMNode[];
+
+        if (tagName === 'img') {
+          const { src, alt } = attribs;
+          return (
+            <div className="mx-auto" style={{ width: '400px' }}>
+              <img src={src} alt={alt} className="w-full object-contain" />
+            </div>
+          );
+        }
+        if (tagName === 'a') {
+          const { href } = attribs;
+          return (
+            <a className="underline" href={href}>
+              {domToReact(domChildren, options)}
+            </a>
+          );
+        }
+        if (tagName === 'p')
+          return (
+            <p className="text-lg my-4">{domToReact(domChildren, options)}</p>
+          );
+      }
+      return;
+    },
+  };
+
   const parsedElements = parse(purifiedContent, options);
 
   return (
     <div id="reader-app">
-      <ReaderHeader />
+      <ReaderHeader>
+        <ReadToMe textRef={containerRef} />
+      </ReaderHeader>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         ref={containerRef}
