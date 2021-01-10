@@ -5,7 +5,7 @@ const ConvertToPdfButton: React.FC = () => {
   const onClickHandler = () => {};
   return (
     <button
-      className="px-4 py-2 bg-white rounded bg-white flex flex-row items-center shadow duration-200 hover:bg-gray-100"
+      className="px-4 py-2 bg-white rounded flex flex-row items-center shadow duration-200 hover:bg-gray-100"
       onClick={onClickHandler}
       type="button"
     >

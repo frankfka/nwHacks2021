@@ -1,6 +1,10 @@
 import { Element } from 'domhandler/lib/node';
 import DOMPurify from 'dompurify';
-import parse, { domToReact, HTMLReactParserOptions } from 'html-react-parser';
+import parse, {
+  DOMNode,
+  domToReact,
+  HTMLReactParserOptions,
+} from 'html-react-parser';
 import * as React from 'react';
 import { ParsedDocument } from '../../Common/parsedDocument';
 import ReaderHeader from '../components/ReaderHeader';
@@ -15,6 +19,8 @@ const options: HTMLReactParserOptions = {
     if (domNode instanceof Element && domNode.attribs) {
       const tagName = domNode.name;
       const { children, attribs } = domNode;
+      // Workaround for Typescript
+      const domChildren = children as DOMNode[];
 
       if (tagName === 'img') {
         const { src, alt } = attribs;
@@ -28,47 +34,24 @@ const options: HTMLReactParserOptions = {
         const { href } = attribs;
         return (
           <a className="underline" href={href}>
-            {domToReact(children, options)}
+            {domToReact(domChildren, options)}
           </a>
         );
       }
       if (tagName === 'p')
-        return <p className="text-lg my-4">{domToReact(children, options)}</p>;
+        return (
+          <p className="text-lg my-4">{domToReact(domChildren, options)}</p>
+        );
     }
+    return;
   },
 };
-
-// function transform(node: any, index: number) {
-//   if (node.type === 'tag' && node.name === 'div') {
-//     return convertNodeToElement(node, index, transform);
-//   }
-//   if (node.type === 'tag' && node.name === 'img') {
-//     return null;
-//   }
-//   if (node.type === 'tag' && node.name === 'p') {
-//     return (
-//       <div className="text-lg my-4">
-//         {convertNodeToElement(node, index, transform)}
-//       </div>
-//     );
-//   }
-//   if (node.type === 'a' && node.name === 'a') {
-//     return (
-//       <div className="text-lg my-4">
-//         {convertNodeToElement(node, index, transform)}
-//       </div>
-//     );
-//   }
-
-//   if (node.type === 'text') return node.data;
-//   return convertNodeToElement(node, index, transform);
-// }
 
 export default function ReaderApp({
   parsedDocument,
 }: ReaderAppProps): JSX.Element {
   const [highlightedRange, setHighlightedRange] = React.useState<Selection>();
-  const containerRef = React.useRef<HTMLElement>();
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   const purifiedContent = DOMPurify.sanitize(parsedDocument.content, {
     USE_PROFILES: { html: true },
@@ -79,6 +62,7 @@ export default function ReaderApp({
   return (
     <div id="reader-app">
       <ReaderHeader />
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         ref={containerRef}
         className="container mx-auto my-32 relative"
