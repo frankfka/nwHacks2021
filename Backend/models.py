@@ -9,3 +9,7 @@ class ExtractRequest(BaseModel):
 
 class ExtractResponse(BaseModel):
     sentences: List[str]
+
+
+class TextToSpeechRequest(BaseModel):
+    text: str
