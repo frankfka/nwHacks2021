@@ -3,17 +3,14 @@ import React, { useEffect, useState } from 'react';
 
 const endpoint = 'http://localhost:8000/extract';
 
-interface Props {
-  textEl: HTMLDivElement | undefined;
-}
-
-const getImportantText = (text: string) => {
-  const [importantText, setImportantText] = useState(null);
+const getImportantText = (text: string | undefined) => {
+  const [importantText, setImportantText] = useState<string[]>();
 
   useEffect(() => {
+    if (!text) return;
     const fetchImportantText = async () => {
       const res = await axios.post(endpoint, { text: text });
-      setImportantText(res.data);
+      setImportantText(res.data.sentences);
     };
 
     fetchImportantText();
@@ -21,6 +18,9 @@ const getImportantText = (text: string) => {
 
   return importantText;
 };
+interface Props {
+  textEl: HTMLDivElement | undefined;
+}
 
 export const TestImportantText: React.FC<Props> = ({ textEl }: Props) => {
   if (!textEl) return null;
