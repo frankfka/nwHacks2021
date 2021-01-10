@@ -1,9 +1,9 @@
-import React, { MutableRefObject } from 'react';
+import React from 'react';
 import { FaHighlighter } from 'react-icons/fa';
 
 interface Props {
   range?: Selection;
-  parentRef: MutableRefObject<HTMLDivElement | null>;
+  parentEl: HTMLDivElement | undefined;
 }
 
 const getViewportPositionOffset = (element: Element) => {
@@ -11,15 +11,15 @@ const getViewportPositionOffset = (element: Element) => {
   return { top: rect.top, left: rect.left };
 };
 
-const HighlightedText: React.FC<Props> = ({ range, parentRef }: Props) => {
-  if (!range || !parentRef?.current) return null;
+const HighlightedText: React.FC<Props> = ({ range, parentEl }: Props) => {
+  if (!range || !parentEl) return null;
   const text = range?.toString();
   if (text.length < 5) return null;
 
   const oRange = range.getRangeAt(0); // get the text range
   const oRect = oRange.getBoundingClientRect();
 
-  const parentPositionOffset = getViewportPositionOffset(parentRef.current);
+  const parentPositionOffset = getViewportPositionOffset(parentEl);
 
   return (
     <button

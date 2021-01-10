@@ -1,10 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Sample WebExtension",
+  "name": "Curate",
   "version": "0.0.0",
 
   "icons": {
-    "16": "assets/icons/favicon-16.png",
     "32": "assets/icons/favicon-32.png",
     "48": "assets/icons/favicon-48.png",
     "128": "assets/icons/favicon-128.png"
@@ -13,12 +12,7 @@
   "homepage_url": "https://jiafrank.com",
   "short_name": "ReaderX",
 
-  "permissions": [
-    "activeTab",
-    "storage",
-    "http://*/*",
-    "https://*/*"
-  ],
+  "permissions": ["activeTab", "storage", "http://*/*", "https://*/*"],
 
   "content_security_policy": "script-src 'self'; object-src 'self'",
 
@@ -39,7 +33,6 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "assets/icons/favicon-16.png",
       "32": "assets/icons/favicon-32.png",
       "48": "assets/icons/favicon-48.png",
       "128": "assets/icons/favicon-128.png"
@@ -57,19 +50,14 @@
   },
 
   "background": {
-    "scripts": [
-      "js/background.bundle.js"
-    ],
+    "scripts": ["js/background.bundle.js"],
     "__chrome|opera__persistent": false
   },
 
-  "content_scripts": [{
-    "matches": [
-      "http://*/*",
-      "https://*/*"
-    ],
-    "js": [
-      "js/contentScript.bundle.js"
-    ]
-  }]
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["js/contentScript.bundle.js"]
+    }
+  ]
 }

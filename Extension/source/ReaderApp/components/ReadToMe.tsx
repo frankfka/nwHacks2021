@@ -1,15 +1,15 @@
-import React, { MutableRefObject } from 'react';
-import getTextToSpeech from '../api/getTextToSpeech';
+import React from 'react';
 import { FcReading } from 'react-icons/fc';
+import getTextToSpeech from '../api/getTextToSpeech';
 
 interface Props {
-  textRef: MutableRefObject<HTMLDivElement | null>;
+  textEl: HTMLDivElement | undefined;
 }
 
-const ReadToMe: React.FC<Props> = ({ textRef }: Props) => {
+const ReadToMe: React.FC<Props> = ({ textEl }: Props) => {
   const onClickHandler = async () => {
-    if (!textRef?.current) return;
-    const text = textRef.current.textContent;
+    if (!textEl) return;
+    const text = textEl.textContent;
     if (!text) return;
 
     // Limit of 5000 chars
@@ -23,7 +23,7 @@ const ReadToMe: React.FC<Props> = ({ textRef }: Props) => {
 
   return (
     <button
-      className="flex flex-row items-center px-4 py-2 rounded relative mx-auto text-lg shadow bg-gray-50 duration-200 hover:bg-gray-100"
+      className="flex flex-row items-center px-4 py-2 rounded relative mx-auto text-lg shadow duration-200 hover:bg-gray-100"
       type="button"
       onClick={onClickHandler}
     >
