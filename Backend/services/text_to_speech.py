@@ -2,7 +2,7 @@ from google.cloud import texttospeech
 from proto import ProtoType
 
 
-class TextToVoiceService:
+class TextToSpeechService:
 
     client: texttospeech.TextToSpeechClient
 
@@ -17,7 +17,7 @@ class TextToVoiceService:
         # Names of voices can be retrieved with client.list_voices().
         voice = texttospeech.VoiceSelectionParams(
             language_code="en-US",
-            name="en-US-Standard-C",
+            name="en-US-Wavenet-G",
             ssml_gender=texttospeech.SsmlVoiceGender.FEMALE,
         )
 
@@ -33,7 +33,7 @@ class TextToVoiceService:
 
 
 if __name__ == '__main__':
-    svc = TextToVoiceService()
+    svc = TextToSpeechService()
 
     convert_result = svc.convert_to_voice('This is some test input text')
 

@@ -3,7 +3,7 @@ import { FaHighlighter } from 'react-icons/fa';
 
 interface Props {
   range?: Selection;
-  parentRef: MutableRefObject<HTMLElement | undefined>;
+  parentRef: MutableRefObject<HTMLDivElement | null>;
 }
 
 const getViewportPositionOffset = (element: Element) => {
@@ -12,7 +12,7 @@ const getViewportPositionOffset = (element: Element) => {
 };
 
 const HighlightedText: React.FC<Props> = ({ range, parentRef }: Props) => {
-  if (!range || !parentRef) return null;
+  if (!range || !parentRef?.current) return null;
   const text = range?.toString();
   if (text.length < 5) return null;
 

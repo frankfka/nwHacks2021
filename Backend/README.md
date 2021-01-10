@@ -8,6 +8,14 @@ to create a new **Virtualenv** environment. Python 3.7+ is recommended.
 
 With a new virtual env, you should now be able to run `pip install -r requirements.txt` to install all the required libraries.
 
+Download `gcloud_creds.json` and place it in the root. **DO NOT EVER COMMIT THIS FILE!**. This
+contains the credentials to authenticate with Google Cloud for text-to-speech. We need to set
+this environment variable so the Google library can find it:
+
+`GOOGLE_APPLICATION_CREDENTIALS=/Users/frankjia/Desktop/PersonalProgramming/nwHacks2021/Backend/gcloud_creds.json`
+
+Of course, replace the path with the path to your own development directory. Absolute path is preferred.
+
 **Starting the Server**
 
 Run `python main.py`. You can do this using PyCharm. Expect to see:
@@ -22,11 +30,17 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
 ```
 
+You can also set `GOOGLE_APPLICATION_CREDENTIALS` in the same call, if you did not set it as a global env variable:
+
+`GOOGLE_APPLICATION_CREDENTIALS=PATH_TO_YOUR_JSON.json python main.py`
+
 The service should now be reachable through http://0.0.0.0:8000.
 
 ## Endpoints
 
-Currently, the only endpoint is `POST /extract`. It expects the following JSON structure:
+### `POST /extract`
+
+It expects the following JSON structure:
 
 ```json
 {
@@ -69,3 +83,8 @@ You should get:
   ]
 }
 ```
+
+### `POST /text-to-speech`
+
+Same input structure as `POST /extract`. The returned response is a streaming response
+of `media_type`: `audio/mpeg`. 

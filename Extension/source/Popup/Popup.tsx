@@ -25,7 +25,7 @@ async function sendMessageToActiveTab(
 const Popup: React.FC = () => {
   return (
     <section id="popup">
-      <h2>WEB-EXTENSION-STARTER</h2>
+      <h2>Curate</h2>
       <div className="flex flex-col">
         <button
           className="px-4 py-2 my-4 shadow rounded bg-blue-400 text-white mx-auto"
