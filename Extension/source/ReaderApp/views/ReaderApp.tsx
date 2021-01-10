@@ -5,6 +5,7 @@ import * as React from 'react';
 import { ParsedDocument } from '../../Common/parsedDocument';
 import ReaderHeader from '../components/ReaderHeader';
 import HighlightedText from '../components/HighlightedText';
+import { TestImportantText } from '../hooks/ExtractImportantSentences'
 
 interface ReaderAppProps {
   parsedDocument: ParsedDocument;
@@ -90,6 +91,7 @@ export default function ReaderApp({
         }}
         onMouseDown={() => setHighlightedRange(undefined)}
       >
+        <TestImportantText/>
         {/* eslint-disable-next-line react/no-danger */}
         {parsedElements}
         <HighlightedText range={highlightedRange} parentRef={containerRef} />
