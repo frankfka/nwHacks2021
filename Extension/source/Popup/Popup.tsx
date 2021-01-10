@@ -44,7 +44,7 @@ const Popup: React.FC = () => {
         >
           Launch Reader
         </button>
-        <button
+        {/* <button
           className="px-8 py-2 w-full my-4 rounded bg-yellow-500 text-white mx-auto block"
           type="button"
           onClick={async (): Promise<void> => {
@@ -54,7 +54,7 @@ const Popup: React.FC = () => {
           }}
         >
           Launch Reader Sandbox
-        </button>
+        </button> */}
       </div>
     </section>
   );

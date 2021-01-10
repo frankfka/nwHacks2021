@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FcReading } from 'react-icons/fc';
 import getTextToSpeech from '../api/getTextToSpeech';
 
@@ -7,18 +7,36 @@ interface Props {
 }
 
 const ReadToMe: React.FC<Props> = ({ textEl }: Props) => {
+  const [audio, setAudio] = useState<HTMLAudioElement>();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
   const onClickHandler = async () => {
     if (!textEl) return;
     const text = textEl.textContent;
     if (!text) return;
 
-    // Limit of 5000 chars
-    const { data, contentType } = await getTextToSpeech(text.slice(0, 4999));
+    if (!audio) {
+      setIsTranslating(true);
+      const { data, contentType } = await getTextToSpeech(text.slice(0, 4999));
 
-    const audioFile = new Blob([data], { type: contentType });
+      const audioFile = new Blob([data], { type: contentType });
 
-    const audio = new Audio(window.URL.createObjectURL(audioFile));
-    audio.play();
+      const audioEl = new Audio(window.URL.createObjectURL(audioFile));
+      setAudio(audioEl);
+      audioEl.play();
+      setIsTranslating(false);
+      setIsPlaying(true);
+    }
+
+    if (audio) {
+      if (audio.paused) {
+        audio.play();
+        setIsPlaying(true);
+      } else {
+        audio.pause();
+        setIsPlaying(false);
+      }
+    }
   };
 
   return (
@@ -28,7 +46,13 @@ const ReadToMe: React.FC<Props> = ({ textEl }: Props) => {
       onClick={onClickHandler}
     >
       <FcReading style={{ display: 'inline-block' }} />
-      <span className="ml-2">Read To Me</span>
+      <span className="ml-2">
+        {isTranslating
+          ? 'Translating...'
+          : isPlaying
+          ? 'Reading...'
+          : 'Read To Me'}
+      </span>
     </button>
   );
 };
