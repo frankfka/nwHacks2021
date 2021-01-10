@@ -78,7 +78,7 @@ export default function ReaderApp({
         }}
         onMouseDown={() => setHighlightedRange(undefined)}
       >
-        <TestImportantText/>
+        <TestImportantText textRef={containerRef} />
         {/* eslint-disable-next-line react/no-danger */}
         {parsedElements}
         <HighlightedText range={highlightedRange} parentRef={containerRef} />
