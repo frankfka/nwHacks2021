@@ -13,6 +13,8 @@ import getImportantText from '../hooks/getImportantText';
 import ReadToMe from '../components/ReadToMe';
 import { FaHighlighter } from 'react-icons/fa';
 import classNames from 'classnames';
+import Meta from '../components/Meta';
+import ArticleH1 from '../components/ArticleH1';
 
 interface ReaderAppProps {
   parsedDocument: ParsedDocument;
@@ -68,6 +70,9 @@ export default function ReaderApp({
             <p className="text-lg my-4">{domToReact(domChildren, options)}</p>
           );
         }
+        if (tagName === 'h1') {
+          return <h1>{domToReact(domChildren, options)}</h1>;
+        }
       }
       if (domNode instanceof Text && domNode.data) {
         if (!highlight) return;
@@ -97,16 +102,17 @@ export default function ReaderApp({
 
   return (
     <div id="reader-app">
+      <Meta />
       <ReaderHeader>
         <button
           type="button"
           onClick={() => setHighlight(!highlight)}
           className={classNames(
-            'flex flex-row items-center px-4 py-2 rounded relative mx-auto text-lg shadow duration-200 ',
+            'flex flex-row items-center px-4 py-2 rounded border-2 relative mx-auto text-sm duration-200 ',
             {
-              'bg-gray-50 hover:bg-gray-100': !highlight,
+              'bg-gray-100 hover:bg-gray-200': !highlight,
 
-              ' bg-yellow-300 text-gray-800 hover:bg-yellow-200': highlight,
+              'bg-yellow-200 text-gray-800 hover:bg-yellow-100': highlight,
             }
           )}
         >
@@ -119,7 +125,7 @@ export default function ReaderApp({
         <ReadToMe textEl={containerEl} />
       </ReaderHeader>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div className="container mx-auto my-32 relative">
+      <div className="container mx-auto mb-32 mt-16 print:mt-0 relative">
         {/* <TestImportantText textEl={containerEl} /> */}
         <div
           ref={containerRef}
@@ -131,6 +137,7 @@ export default function ReaderApp({
           }}
           onMouseDown={() => setHighlightedRange(undefined)}
         >
+          <ArticleH1 />
           {/* eslint-disable-next-line react/no-danger */}
           {parsedElements}
           <HighlightedText range={highlightedRange} parentEl={containerEl} />

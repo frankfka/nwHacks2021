@@ -1,11 +1,21 @@
-import {browser} from 'webextension-polyfill-ts';
+import { browser } from 'webextension-polyfill-ts';
 import {
   ParseDocumentSuccessMessage,
   RuntimeMessage,
   RuntimeMessageType,
 } from '../Common/runtimeMessage';
 import parseDocumentArticle from './parseDocumentArticle';
-import {mockCBCArticle} from '../data/mockCBCParsedArticle';
+import { mockCBCArticle } from '../data/mockCBCParsedArticle';
+
+const getH1text = () => {
+  let h1Text = '';
+  const h1Els = document.getElementsByTagName('h1');
+  const h1El = h1Els?.[0];
+  if (h1El) {
+    h1Text = h1El.textContent ?? '';
+  }
+  return h1Text;
+};
 
 async function processParseDocMessage(): Promise<void> {
   console.log('Starting to parse document');
@@ -14,6 +24,8 @@ async function processParseDocMessage(): Promise<void> {
     const updateReaderDocMessage: ParseDocumentSuccessMessage = {
       type: RuntimeMessageType.PARSE_DOC_SUCCESS,
       parsed: parsedArticle,
+      meta: window.document.head.innerHTML,
+      h1text: getH1text(),
     };
     console.log('Sending success message', updateReaderDocMessage);
     await browser.runtime.sendMessage(updateReaderDocMessage);
@@ -33,6 +45,8 @@ export default async function processRuntimeMessage(
     const updateReaderDocMessage: ParseDocumentSuccessMessage = {
       type: RuntimeMessageType.PARSE_DOC_SUCCESS,
       parsed: mockCBCArticle,
+      meta: window.document.head.innerHTML,
+      h1text: getH1text(),
     };
     console.log(
       'Sending success message with mock data',

@@ -18,20 +18,5 @@ const getImportantText = (text: string | undefined) => {
 
   return importantText;
 };
-interface Props {
-  textEl: HTMLDivElement | undefined;
-}
-
-export const TestImportantText: React.FC<Props> = ({ textEl }: Props) => {
-  if (!textEl) return null;
-  const text = textEl.textContent;
-  if (!text) return <div>"hi"</div>;
-  const importantText = getImportantText(text);
-
-  if (!importantText) return null;
-
-  console.log(importantText);
-  return <div>{JSON.stringify(importantText)}</div>;
-};
 
 export default getImportantText;

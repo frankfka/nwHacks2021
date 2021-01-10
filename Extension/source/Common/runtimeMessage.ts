@@ -1,4 +1,4 @@
-import {ParsedDocument} from './parsedDocument';
+import { ParsedDocument } from './parsedDocument';
 
 export enum RuntimeMessageType {
   INJECT_CONTENT = 'INJECT_CONTENT',
@@ -6,6 +6,8 @@ export enum RuntimeMessageType {
   PARSE_MOCK_DOC = 'PARSE_MOCK_DOC',
   PARSE_DOC_SUCCESS = 'PARSE_DOC_SUCCESS',
   GET_PARSED_DOC = 'GET_PARSED_DOC',
+  GET_META = 'GET_META',
+  GET_H1_TEXT = 'GET_H1_TEXT',
 }
 
 export interface RuntimeMessage {
@@ -14,4 +16,6 @@ export interface RuntimeMessage {
 
 export interface ParseDocumentSuccessMessage extends RuntimeMessage {
   parsed: ParsedDocument;
+  meta: string;
+  h1text: string;
 }

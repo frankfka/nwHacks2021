@@ -34,7 +34,7 @@ const Popup: React.FC = () => {
       />
       <div className="block">
         <button
-          className="px-8 py-2 w-full my-4 shadow rounded bg-blue-400 text-white mx-auto block"
+          className="px-8 py-2 w-full my-4 rounded bg-yellow-500 text-white mx-auto block"
           type="button"
           onClick={async (): Promise<void> => {
             await sendMessageToActiveTab({
@@ -45,7 +45,7 @@ const Popup: React.FC = () => {
           Launch Reader
         </button>
         <button
-          className="px-8 py-2 w-full my-4 shadow rounded bg-blue-400 text-white mx-auto block"
+          className="px-8 py-2 w-full my-4 rounded bg-yellow-500 text-white mx-auto block"
           type="button"
           onClick={async (): Promise<void> => {
             await sendMessageToActiveTab({
