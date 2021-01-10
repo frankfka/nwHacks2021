@@ -23,7 +23,7 @@ const ReadToMe: React.FC<Props> = ({ textEl }: Props) => {
 
   return (
     <button
-      className="flex flex-row items-center px-4 py-2 rounded relative mx-auto text-lg shadow duration-200 hover:bg-gray-100"
+      className="flex flex-row items-center px-4 py-2 rounded border-2 bg-gray-100 relative mx-auto text-sm duration-200 hover:bg-indigo-200"
       type="button"
       onClick={onClickHandler}
     >

@@ -102,11 +102,11 @@ export default function ReaderApp({
           type="button"
           onClick={() => setHighlight(!highlight)}
           className={classNames(
-            'flex flex-row items-center px-4 py-2 rounded relative mx-auto text-lg shadow duration-200 ',
+            'flex flex-row items-center px-4 py-2 rounded border-2 relative mx-auto text-sm duration-200 ',
             {
-              'bg-gray-50 hover:bg-gray-100': !highlight,
+              'bg-gray-100 hover:bg-gray-200': !highlight,
 
-              ' bg-yellow-300 text-gray-800 hover:bg-yellow-200': highlight,
+              'bg-yellow-200 text-gray-800 hover:bg-yellow-100': highlight,
             }
           )}
         >

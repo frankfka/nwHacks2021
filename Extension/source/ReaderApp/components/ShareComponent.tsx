@@ -15,7 +15,7 @@ const ShareComponent: React.FC = () => {
 
   return (
     <>
-      <div className="relative px-4 py-2 shadow rounded bg-white flex flex-row space-x-4 mx-auto">
+      <div className="relative px-4 py-1.5 rounded border-2 bg-white flex flex-row space-x-4 mx-auto">
         <FacebookShareButton url={url}>
           <FacebookIcon size={24} />
         </FacebookShareButton>

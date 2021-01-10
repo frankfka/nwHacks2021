@@ -4,7 +4,7 @@ import { FaFilePdf } from 'react-icons/fa';
 const ConvertToPdfButton: React.FC = () => {
   return (
     <button
-      className="px-4 py-2 bg-white rounded flex flex-row items-center shadow duration-200 hover:bg-gray-100"
+      className="px-4 py-2 text-sm rounded border-2 bg-gray-100 flex flex-row items-center duration-200 hover:bg-red-300"
       onClick={() => {
         window.print();
       }}
@@ -19,7 +19,7 @@ const ConvertToPdfButton: React.FC = () => {
           }}
         />
       </span>
-      <span className="text-base">Print as PDF</span>
+      <span className="text-sm">Print as PDF</span>
     </button>
   );
 };
