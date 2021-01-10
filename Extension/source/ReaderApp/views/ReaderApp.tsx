@@ -14,6 +14,7 @@ import ReadToMe from '../components/ReadToMe';
 import { FaHighlighter } from 'react-icons/fa';
 import classNames from 'classnames';
 import Meta from '../components/Meta';
+import ArticleH1 from '../components/ArticleH1';
 
 interface ReaderAppProps {
   parsedDocument: ParsedDocument;
@@ -68,6 +69,9 @@ export default function ReaderApp({
           return (
             <p className="text-lg my-4">{domToReact(domChildren, options)}</p>
           );
+        }
+        if (tagName === 'h1') {
+          return <h1>{domToReact(domChildren, options)}</h1>;
         }
       }
       if (domNode instanceof Text && domNode.data) {
@@ -133,6 +137,7 @@ export default function ReaderApp({
           }}
           onMouseDown={() => setHighlightedRange(undefined)}
         >
+          <ArticleH1 />
           {/* eslint-disable-next-line react/no-danger */}
           {parsedElements}
           <HighlightedText range={highlightedRange} parentEl={containerEl} />

@@ -7,6 +7,7 @@ export enum RuntimeMessageType {
   PARSE_DOC_SUCCESS = 'PARSE_DOC_SUCCESS',
   GET_PARSED_DOC = 'GET_PARSED_DOC',
   GET_META = 'GET_META',
+  GET_H1_TEXT = 'GET_H1_TEXT',
 }
 
 export interface RuntimeMessage {
@@ -16,4 +17,5 @@ export interface RuntimeMessage {
 export interface ParseDocumentSuccessMessage extends RuntimeMessage {
   parsed: ParsedDocument;
   meta: string;
+  h1text: string;
 }

@@ -14,7 +14,7 @@ const ConvertToPdfButton: React.FC = () => {
         <FaFilePdf
           style={{
             display: 'inline-block',
-            fontSize: '1.2rem',
+            fontSize: '1rem',
             color: 'inherit',
           }}
         />
