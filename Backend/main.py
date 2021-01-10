@@ -18,7 +18,7 @@ async def init_services():
     ctx['services'] = AppServices()
 
 
-@app.get("/lifecheck")
+@app.get("/")
 async def lifecheck():
     return {"message": "OK"}
 
