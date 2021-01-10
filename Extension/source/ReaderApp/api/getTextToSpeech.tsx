@@ -11,8 +11,6 @@ const getTextToSpeech = async (text: string) => {
     }
   );
 
-  console.log(res);
-
   return { data: res.data, contentType: res.headers['content-type'] };
 };
 
